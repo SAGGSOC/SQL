@@ -18,3 +18,30 @@ DDL is short name of Data Definition Language, which deals with database schemas
 * TRUNCATE - remove all records from a table, including all spaces allocated for the records are removed
 * COMMENT - add comments to the data dictionary
 * RENAME - rename an object
+
+## DML - Data Manipulation Language
+DML is short name of Data Manipulation Language which deals with data manipulation and includes most common SQL statements such SELECT, INSERT, UPDATE, DELETE etc, and it is used to store, modify, retrieve, delete and update data in a database.
+
+* SELECT - retrieves records from one or more tables
+* INSERT - creates a record
+* UPDATE - modifies records
+* DELETE - deletes records
+* MERGE - UPSERT operation (insert or update)
+* CALL - call a PL/SQL or Java subprogram
+* EXPLAIN PLAN - interpretation of the data access path
+* LOCK TABLE - concurrency control
+
+## DCL - Data Control Language
+DCL is short name of Data Control Language which includes commands such as GRANT and mostly concerned with rights, permissions and other controls of the database system.
+
+* GRANT (Grant privilige(s) to user)
+* REVOKE (Remove granted privilige(s) from a user)
+
+## TCL - Transaction Control Language
+TCL is short name of Transaction Control Language which deals with a transaction within a database.
+
+* COMMIT - commits a transaction
+* ROLLBACK - rollback a transaction in case of any error occurs
+* SAVEPOINT - to rollback the transaction making points within groups
+* SET TRANSACTION - specify characteristics of the transaction
+
