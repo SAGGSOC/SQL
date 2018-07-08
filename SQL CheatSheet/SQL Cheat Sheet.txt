@@ -1,0 +1,156 @@
+SELECT
+
+SELECT statements are used to fetch data from a database. Every query will begin with SELECT.
+
+Generic: SELECT column_name FROM table_name
+
+Example: 
+SELECT * FROM department
+SELECT last_name, salary, 12*salary+100 FROM employees;
+
+Using Column Aliases:
+SELECT last_name AS name, commission_pct comm FROM employees;
+SELECT last_name "Name", salary*12 "Annual Salary" FROM employees;
+
+Concatenation Operator(||):
+
+SELECT last_name||job_id AS "Employees" FROM employees;
+
+Using Literals:
+
+SELECT last_name ||' is a '||job_id AS "Employee Details" FROM employees;
+
+DISTINCT
+
+SELECT DISTINCT
+
+SELECT DISTINCT specifies that the statement is going to be a query that returns unique values in the specified column(s).
+
+SELECT DISTINCT column_name FROM table_name;
+
+Example:
+SELECT DISTINCT department_id FROM employees;
+
+DESCRIBE:Describe table structure
+
+DESC[RIBE] tablename
+
+WHERE:
+
+WHERE is a clause that indicates you want to filter the result set to include only rows where the following condition is true.
+
+SELECT column_name(s) FROM table_name WHERE column_name operator value;
+
+EXAMPLE
+SELECT employee_id, last_name, job_id, department_id FROM employees WHERE department_id = 90 ;
+
+SELECT last_name, job_id, department_id FROM employees WHERE last_name = 'Whalen';
+
+OPERATORS:
+
+Operator  Meaning
+=         Equal to
+>         Greater than
+>=        Greater than or equal to
+<         Less than
+<=        Less than or equal to
+<>        Not equal to
+
+SELECT last_name, salary FROM employees WHERE salary <= 3000;
+
+
+Operator    Meaning
+BETWEEN     Between two values (inclusive),
+...AND...   
+IN(set)     Match any of a list of values
+LIKE        Match a character pattern
+IS NULL     Is a null value
+
+Examples: 
+SELECT last_name, salary FROM employees WHERE salary BETWEEN 2500 AND 3500;
+
+SELECT employee_id, last_name, salary, manager_id FROM employees
+WHERE manager_id IN (100, 101, 201);
+
+
+For Like:
+LIKE condition to perform wildcard searches of valid search string values.
+Search conditions can contain either literal characters or numbers:
+– % denotes zero or many characters.
+– _ denotes one character.
+
+SELECT first_name FROM employees WHERE first_name LIKE 'S%';
+SELECT last_name FROM employees WHERE last_name LIKE '_o%';
+
+IS NULL:
+
+SELECT last_name, manager_id FROM employees WHERE manager_id IS NULL;
+
+Operator  Meaning
+AND       Returns TRUE if both component conditions are true
+OR        Returns TRUE if either component condition is true
+NOT       Returns TRUE if the following condition is false
+
+SELECT employee_id, last_name, job_id, salary FROM employees WHERE salary >=10000 AND job_id LIKE '%MAN%';
+
+SELECT employee_id, last_name, job_id, salary FROM employees WHERE salary >= 10000 OR job_id LIKE '%MAN%';
+
+SELECT last_name, job_id FROM employees WHERE job_id NOT IN ('IT_PROG', 'ST_CLERK', 'SA_REP');
+
+Rules of Precedence
+
+Order Evaluated Operator
+		1 Arithmetic operators
+		2 Concatenation operator
+		3 Comparison conditions
+		4 IS [NOT] NULL, LIKE, [NOT] IN
+		5 [NOT] BETWEEN
+		6 NOT logical condition
+		7 AND logical condition
+		8 OR logical condition
+
+
+ORDER BY:
+Sort rows with the ORDER BY clause
+– ASC: ascending order, default
+– DESC: descending order
+
+The ORDER BY clause comes last in the SELECT statement.
+
+SELECT last_name, job_id, department_id, hire_date FROM employees
+ORDER BY hire_date ;
+
+SELECT last_name, job_id, department_id, hire_date FROM employees
+ORDER BY hire_date DESC;
+
+(Column ALias)
+SELECT employee_id, last_name, salary*12 annsal FROM employees
+ORDER BY annsal;
+
+(Multiple Columns)
+SELECT last_name, department_id, salary FROM employees
+ORDER BY department_id, salary DESC;
+
+Function               Result
+
+LOWER('SQL Course')   sql course
+UPPER('SQL Course')   SQL COURSE
+INITCAP('SQL Course') Sql Course
+
+
+SELECT employee_id, last_name, department_id
+FROM employees
+WHERE LOWER(last_name) = 'higgins';
+
+Function    				 Result
+CONCAT('Hello', 'World')     HelloWorld
+SUBSTR('HelloWorld',1,5)     Hello
+LENGTH('HelloWorld')         10
+INSTR('HelloWorld', 'W')     6
+LPAD(salary,10,'*')          *****24000
+RPAD(salary, 10, '*')        24000*****
+TRIM('H' FROM 'HelloWorld')  elloWorld
+
+
+
+
