@@ -152,5 +152,210 @@ RPAD(salary, 10, '*')        24000*****
 TRIM('H' FROM 'HelloWorld')  elloWorld
 
 
+SELECT employee_id, CONCAT(first_name, last_name) NAME, job_id, LENGTH (last_name), INSTR(last_name, 'a') "Contains 'a'?"
+FROM employees WHERE SUBSTR(job_id, 4) = 'REP';
+
+ROUND: Rounds value to specified decimal
+-> ROUND(45.926, 2) 45.93
+TRUNC: Truncates value to specified decimal
+-> TRUNC(45.926, 2) 45.92
+MOD: Returns remainder of division
+-> MOD(1600, 300) 100
+
+SELECT ROUND(45.923,2), ROUND(45.923,0),ROUND(45.923,-1) FROM DUAL;
+(Remember DUAL)System
 
 
+SELECT last_name, salary, MOD(salary, 5000) FROM employees WHERE job_id = 'SA_REP';
+
+SYSDATE is a function that returns:
+• Date
+• Time
+
+SELECT last_name, (SYSDATE-hire_date)/7 AS WEEKS FROM employees
+WHERE department_id = 90;
+
+Function           Description
+MONTHS_BETWEEN     Number of months between two dates
+ADD_MONTHS         Add calendar months to date
+NEXT_DAY           Next day of the date specified
+LAST_DAY           Last day of the month
+ROUND              Round date
+TRUNC              Truncate date
+
+
+• MONTHS_BETWEEN ('01-SEP-95','11-JAN-94') -> 19.6774194
+• ADD_MONTHS ('11-JAN-94',6) -> '11-JUL-94'
+• NEXT_DAY ('01-SEP-95','FRIDAY') -> '08-SEP-95'
+• LAST_DAY('01-FEB-95') -> '28-FEB-95'
+
+
+Assume SYSDATE = '25-JUL-95':
+
+• ROUND(SYSDATE,'MONTH') -> 01-AUG-95
+• ROUND(SYSDATE ,'YEAR') -> 01-JAN-96
+• TRUNC(SYSDATE ,'MONTH') -> 01-JUL-95
+• TRUNC(SYSDATE ,'YEAR') -> 01-JAN-95
+
+TO_CHAR('date','format_model')
+
+
+SELECT last_name,TO_CHAR(hire_date, 'fmDD Month YYYY') AS HIREDATE FROM employees;
+
+
+SELECT last_name, TO_CHAR(hire_date, 'DD-Mon-YYYY') FROM employees WHERE hire_date < TO_DATE('01-Jan-90', 'DD-Mon-RR');
+
+SELECT last_name,NVL(TO_CHAR(manager_id), 'No Manager')
+FROM employees WHERE manager_id IS NULL;
+
+NVL Function
+
+Converts a null to an actual value.
+• Data types that can be used are date, character,and number.
+• Data types must match:
+– NVL(commission_pct,0)
+– NVL(hire_date,'01-JAN-97')
+– NVL(job_id,'No Job Yet')
+
+SELECT first_name, LENGTH(first_name) "expr1", last_name, LENGTH(last_name) "expr2", NULLIF(LENGTH(first_name), LENGTH(last_name)) result FROM employees;
+
+• Cross joins
+• Natural joins
+• Using clause
+• Full or two sided outer
+joins
+• Arbitrary join conditions for outer joins
+
+JOIN:
+
+SELECT table1.column, table2.column
+FROM table1, table2
+WHERE table1.column1 = table2.column2;
+
+SELECT employees.employee_id, employees.last_name,employees.department_id, departments.department_id, departments.location_id
+FROM employees, departments 
+WHERE employees.department_id = departments.department_id;
+
+SELECT e.employee_id, e.last_name, e.department_id,
+d.department_id, d.location_id
+FROM employees e , departments d
+WHERE e.department_id = d.department_id;
+
+To join n tables together, you need a minimum of
+n-1 join conditions. For example, to join three
+tables, a minimum of two joins is required.
+
+SELECT e.last_name, e.salary, j.grade_level
+FROM employees e, job_grades j
+WHERE e.salary
+BETWEEN j.lowest_sal AND j.highest_sal;
+
+The Outer join operator is the plus sign (+).
+
+SELECT table1.column, table2.column
+FROM table1, table2
+WHERE table1.column(+) = table2.column;
+
+SELECT table1.column, table2.column
+FROM table1, table2
+WHERE table1.column = table2.column(+);
+
+SELECT e.last_name, e.department_id, d.department_name
+FROM employees e, departments d
+WHERE e.department_id(+) = d.department_id ;
+
+
+Joining a Table to Itself
+
+SELECT worker.last_name || ' works for '
+|| manager.last_name
+FROM employees worker, employees manager
+WHERE worker.manager_id = manager.employee_id ;
+
+
+CROSS JOIN
+The CROSS JOIN clause produces the crossproduct
+of two tables.
+SELECT last_name, department_name
+FROM employees
+CROSS JOIN departments ;
+
+NATURAL JOIN clause is based on all columns in the two tables that have the same name.
+It selects rows from the two tables that have equal values in all matched columns.
+• If the columns having the same names have different data types, an error is returned.
+
+SELECT department_id, department_name, location_id, city
+FROM departments NATURAL JOIN locations ;
+
+SELECT e.employee_id, e.last_name, d.location_id FROM employees e JOIN departments d USING (department_id) ;
+
+SELECT e.employee_id, e.last_name, e.department_id,
+d.department_id, d.location_id
+FROM employees e JOIN departments d
+ON (e.department_id = d.department_id);
+
+A join between two tables that returns the results
+of the inner join as well as unmatched rows left (or
+right) tables is a left (or right) outer join.
+
+A join between two tables that returns the results
+of an inner join as well as the results of a left and
+right join is a full outer join.
+
+SELECT e.last_name, e.department_id, d.department_name
+FROM employees e LEFT OUTER JOIN departments d
+ON (e.department_id = d.department_id) ;
+
+SELECT e.last_name, e.department_id, d.department_name
+FROM employees e RIGHT OUTER JOIN departments d
+ON (e.department_id = d.department_id) ;
+
+SELECT e.last_name, e.department_id, d.department_name
+FROM employees e
+FULL OUTER JOIN departments d
+ON (e.department_id = d.department_id) ;
+
+SELECT AVG(salary), MAX(salary),
+MIN(salary), SUM(salary)
+FROM employees
+WHERE job_id LIKE '%REP%';
+
+COUNT(expr) returns the number of rows with
+non-null values for the expr.
+
+SELECT COUNT(commission_pct) FROM employees
+WHERE department_id = 80;
+
+SELECT COUNT(DISTINCT department_id) FROM employees;
+
+SELECT department_id, AVG(salary) FROM employees
+GROUP BY department_id;
+
+SELECT department_id, MAX(salary) FROM employees
+GROUP BY department_id HAVING MAX(salary)>10000 ;
+
+SELECT job_id, SUM(salary) PAYROLL
+FROM employees
+WHERE job_id NOT LIKE '%REP%'
+GROUP BY job_id
+HAVING SUM(salary) > 13000
+ORDER BY SUM(salary);
+
+Using a Subquery
+SELECT last_name FROM employees WHERE salary > (SELECT salary
+FROM employees WHERE last_name = 'Abel');
+
+SELECT last_name, job_id, salary FROM employees
+WHERE job_id = (SELECT job_id FROM employees WHERE employee_id = 141)
+AND salary > (SELECT salary FROM employees WHERE employee_id = 143);
+
+Operator
+IN
+ANY
+ALL
+Meaning
+Equal to any member in the list
+Compare value to each value returned by
+the subquery
+Compare value to every value returned
+by the subquery
