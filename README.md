@@ -224,3 +224,29 @@ X –> Y is called completely non-trivial when X intersect Y is NULL.
 Examples:
  * Id --> Name, 
  * Name --> DOB
+
+### Normal Forms
+Normalization is the process of minimizing redundancy from a relation or set of relations. Redundancy in relation may cause insertion, deletion and updation anomalies. So, it helps to minimize the redundancy in relations. Normal forms are used to eliminate or reduce redundancy in database tables.
+
+1.First Normal Form –
+
+If a relation contain composite or multi-valued attribute, it violates first normal form or a relation is in first normal form if it does not contain any composite or multi-valued attribute. A relation is in first normal form if every attribute in that relation is singled valued attribute.
+
+~~~
+ID   Name   Courses
+------------------
+1    A      c1, c2
+2    E      c3
+3    M      C2, c3
+
+In the above table Course is a multi valued attribute so it is not in 1NF.
+Below Table is in 1NF as there is no multi valued attribute
+
+ID   Name   Course
+------------------
+1    A       c1
+1    A       c2
+2    E       c3
+3    M       c1
+3    M       c2
+~~~
