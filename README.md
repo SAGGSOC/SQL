@@ -1,15 +1,15 @@
 # SQL
 
-###Introduction
+### Introduction
 
 * SQL is Structured Query Language, which is a programming language for storing, manipulating and retrieving data stored in a relational database.
 * SQL is the standard language for Relational Database System. All the Relational Database Management Systems (RDMS) like MySQL, MS   Access, Oracle, Sybase, Informix, Postgres and SQL Server use SQL as their standard database language.
 
-####SQL Process
+#### SQL Process
 * When a SQL command is executed in any RDBMS, the system determines the best way to carry out your command and SQL engine figures out how to interpret the task.
 * Components like Query Dispatcher, Optimization Engines, Classic Query Engine, SQL Query Engine etc are involved in this process.
 
-###SQL Commands
+### SQL Commands
 ## DDL - Data Definition Language
 DDL is short name of Data Definition Language, which deals with database schemas and descriptions, of how the data should reside in the database.
 * CREATE - create a new table, view for a table or other object in the database
@@ -194,4 +194,33 @@ Join between R And S with condition  R.marks >= S.marks
       3       F       60        11     M        22
       3       F       60        12     M        59
       
-      
+### Normalization
+Database normalization is the process of organizing the attributes of database to reduce or eliminate data redundancy (having same data but at different places) .
+
+#### Problems because of data redundancy
+Data redundancy unnecessarily increases size of database as same data is repeated on many places. Inconsistency problems also arise during insert, delete and update operations.
+
+### Functional Dependency
+Functional Dependency is a constraint between two sets of attributes in a relation from a database. Functional dependency is denoted by arrow (→). If an attributed A functionally determines B, then it is written as A → B.
+
+For example employee_id → name means employee_id functionally determines name of employee. As another example in a time table database, {student_id, time} → {lecture_room}, student ID and time determine the lecture room where student should be.
+
+##### What does functionally dependent mean?
+A function dependency A → B mean for all instances of a particular value of A, there is same value of B.
+
+For example in the below table A → B is true, but B → A is not true as there are different values of A for B = 3.
+
+### Trivial Functional Dependency
+X –> Y is trivial only when Y is subset of X.
+Examples
+ABC --> AB
+ABC --> A
+ABC --> ABC
+
+### Non Trivial Functional Dependencies
+X –> Y is a non trivial functional dependencies when Y is not a subset of X.
+
+X –> Y is called completely non-trivial when X intersect Y is NULL.
+Examples:
+ * Id --> Name, 
+ * Name --> DOB
