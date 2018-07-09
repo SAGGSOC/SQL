@@ -41,6 +41,27 @@ Codd rules were proposed by E.F. Codd which should be satisfied by relational mo
     * Distribution Independence: Distribution of data over various locations should not be visible to end-users.
     Non-Subversion Rule: Low level access to data should not be able to bypass integrity rule to change data.
 
+### Keys in Relational Model (Candidate, Super, Primary, Alternate and Foreign)
+Candidate Key: The minimal set of attribute which can uniquely identify a tuple is known as candidate key. For Example, STUD_NO in STUDENT relation. 
+
+ * The value of Candidate Key is unique and non-null for every tuple.
+ * There can be more than one candidate key in a relation. For Example, STUD_NO as well as STUD_PHONE both are candidate keys for relation STUDENT.
+ * The candidate key can be simple (having only one attribute) or composite as well. For Example, {STUD_NO, COURSE_NO} is a composite candidate key for relation STUDENT_COURSE.
+##### Note – In Sql Server a unique constraint that has a nullable column, allows the value ‘null‘ in that column only once. That’s why STUD_PHONE attribute as candidate here, but can not be ‘null’ values in primary key attribute.
+
+Super Key: The set of attributes which can uniquely identify a tuple is known as Super Key. For Example, STUD_NO, (STUD_NO, STUD_NAME) etc.
+
+  * Adding zero or more attributes to candidate key generates super key.
+  * A candidate key is a super key but vice versa is not true.
+
+Primary Key: There can be more than one candidate key in a relation out of which one can be chosen as primary key. For Example, STUD_NO as well as STUD_PHONE both are candidate keys for relation STUDENT but STUD_NO can be chosen as primary key (only one out of many candidate keys).
+
+Alternate Key: The candidate key other than primary key is called as alternate key. For Example, STUD_NO as well as STUD_PHONE both are candidate keys for relation STUDENT but STUD_PHONE will be alternate key (only one out of many candidate keys).
+
+Foreign Key: If an attribute can only take the values which are present as values of some other attribute, it will be foreign key to the attribute to which it refers. The relation which is being referenced is called referenced relation and corresponding attribute is called referenced attribute and the relation which refers to referenced relation is called referencing relation and corresponding attribute is called referencing attribute. Referenced attribute of referencing attribute should be primary key. For Example, STUD_NO in STUDENT_COURSE is a foreign key to STUD_NO in STUDENT relation. 
+
+
+
 ### SQL Commands
 ## DDL - Data Definition Language
 DDL is short name of Data Definition Language, which deals with database schemas and descriptions, of how the data should reside in the database.
