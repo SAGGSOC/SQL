@@ -303,3 +303,67 @@ ID   Name   Course
 3    M       c1
 3    M       c2
 ~~~
+2.Second Normal Form
+To be in second normal form, a relation must be in first normal form and relation must not contain any partial dependency. A relation is in 2NF iff it has No Partial Dependency, i.e., no non-prime attribute (attributes which are not part of any candidate key) is dependent on any proper subset of any candidate key of the table. 
+
+```
+STUD NO. Course No. Course Name
+-------------------------------
+  1         C1       DBMS
+  2         C2       Computer Networks
+  1         C2       Computer Networks.
+```
+#### Partial Dependency – If proper subset of candidate key determines non-prime attribute, it is called partial dependency.
+
+   Example 1 – In relation STUDENT_COURSE given in Table 3,
+```
+    FD set: {COURSE_NO->COURSE_NAME}
+    Candidate Key: {STUD_NO, COURSE_NO}
+```
+* In FD COURSE_NO->COURSE_NAME, COURSE_NO (proper subset of candidate key) is determining COURSE_NAME (non-prime attribute). Hence, it is partial dependency and relation is not in second normal form.
+* To convert it to second normal form, we will decompose the relation STUDENT_COURSE (STUD_NO, COURSE_NO, COURSE_NAME) as :
+```
+    STUDENT_COURSE (STUD_NO, COURSE_NO)
+    COURSE (COURSE_NO, COURSE_NAME)
+```
+  #### Note – This decomposition will be lossless join decomposition as well as dependency preserving.
+  
+  Example 2 – Consider following functional dependencies in relation  R (A,  B , C,  D ) 
+  ```
+  AB -> C  [A and B together determine C]
+  BC -> D  [B and C together determine D]
+  ```
+In the above relation, AB is the only candidate key and there is no partial dependency, i.e., any proper subset of AB doesn’t determine any non-prime attribute.
+
+3. Third Normal Form –
+
+A relation is in third normal form, if there is no transitive dependency for non-prime attributes is it is in second normal form.
+A relation is in 3NF iff at least one of the following condition holds in every non-trivial function dependency X –> Y
+
+   ```
+   X is a super key.
+   Y is a prime attribute (each element of Y is part of some candidate key).
+   ```
+```
+  STUD_NO   STUD_NAME   STUD_STATE   STUD_COUNTRY  STUD_AGE
+  1         RAM         HARYANA      INDIA         20
+  2         SURESH      PUNJAB       INDIA         19
+  3         SURESH      PUNJAB       INDIA         21
+ ```
+ 
+transitive dependency – If A->B and B->C are two FDs then A->C is called transitive dependency.
+
+    Example 1 – In relation STUDENT given in Table 4,
+
+    FD set: {STUD_NO -> STUD_NAME, STUD_NO -> STUD_STATE, STUD_NO -> STUD_COUNTRY, STUD_NO -> STUD_AGE, STUD_STATE -> STUD_COUNTRY}
+    Candidate Key: {STUD_NO}
+
+    For this relation in table 4, STUD_NO -> STUD_STATE and STUD_STATE -> STUD_COUNTRY are true. So STUD_COUNTRY is transitively dependent on STUD_NO. It violates third normal form. To convert it in third normal form, we will decompose the relation STUDENT (STUD_NO, STUD_NAME, STUD_PHONE, STUD_STATE, STUD_COUNTRY_STUD_AGE) as:
+    STUDENT (STUD_NO, STUD_NAME, STUD_PHONE, STUD_STATE, STUD_AGE)
+    STATE_COUNTRY (STATE, COUNTRY)
+    Example 2 – Consider relation R(A, B, C, D, E)
+    A -> BC,
+    CD -> E,
+    B -> D,
+    E -> A
+    All possible candidate keys in above relation are {A, E, CD, BC} All attribute are on right sides of all functional dependencies are prime.
