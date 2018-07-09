@@ -9,6 +9,38 @@
 * When a SQL command is executed in any RDBMS, the system determines the best way to carry out your command and SQL engine figures out how to interpret the task.
 * Components like Query Dispatcher, Optimization Engines, Classic Query Engine, SQL Query Engine etc are involved in this process.
 
+### Relational Model
+* Relational Model: Relational model represents data in the form of relations or tables.
+
+* Relational Schema: Schema represents structure of a relation. e.g.; Relational Schema of STUDENT relation can be represented as:
+STUDENT (STUD_NO, STUD_NAME, STUD_PHONE, STUD_STATE, STUD_COUNTRY, STUD_AGE)
+
+* Relational Instance: The set of values present in a relation at a particular instance of time is known as relational instance as shown in Table 1 and Table 2.
+
+* Attribute: Each relation is defined in terms of some properties, each of which is known as attribute. For Example, STUD_NO, STUD_NAME etc. are attributes of relation STUDENT.
+
+* Domain of an attribute: The possible values an attribute can take in a relation is called its domain. For Example, domain of STUD_AGE can be from 18 to 40.
+* Tuple: Each row of a relation is known as tuple. e.g.; STUDENT relation given above has 4 tuples.
+
+* NULL values: Values of some attribute for some tuples may be unknown, missing or undefined which are represented by NULL. Two NULL values in a relation are considered different from each other.
+
+                                                       #### Codd Rules
+
+Codd rules were proposed by E.F. Codd which should be satisfied by relational model.
+
+   * Information Rule: Data stored in Relational model must be a value of some cell of a table.
+   * Guaranteed Access Rule: Every data element must be accessible by table name, its primary key and name of attribute whose value is to be determined.
+   * Systematic Treatment of NULL values: NULL value in database must only correspond to missing, unknown or not applicable values.
+   * Active Online Catalog: Structure of database must be stored in an online catalog which can be queried by authorized users.
+   * Comprehensive Data Sub-language Rule: A database should be accessible by a language supported for definition, manipulation and transaction management operation.
+   * View Updating Rule: Different views created for various purposes should be automatically updatable by the system.
+   * High level insert, update and delete rule: Relational Model should support insert, delete, update etc. operations at each level of relations. Also, set operations like Union, Intersection and minus should be supported.
+    * Physical data independence: Any modification in the physical location of a table should not enforce modification at application level.
+    * Logical data independence: Any modification in logical or conceptual schema of a table should not enforce modification at application level. For example, merging of two tables into one should not affect application accessing it which is difficult to achieve.
+    * Integrity Independence: Integrity constraints modified at database level should not enforce modification at application level.
+    * Distribution Independence: Distribution of data over various locations should not be visible to end-users.
+    Non-Subversion Rule: Low level access to data should not be able to bypass integrity rule to change data.
+
 ### SQL Commands
 ## DDL - Data Definition Language
 DDL is short name of Data Definition Language, which deals with database schemas and descriptions, of how the data should reside in the database.
